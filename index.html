@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Watermark Remover Online - Erase Text, Logos & Objects Instantly</title>
+    <meta name="description" content="Erase watermarks, text, logos, or any unwanted objects from your images instantly for free using advanced AI. No registration required. Multi-language support.">
+    <meta name="keywords" content="watermark remover, remove watermark from image, AI watermark eraser, free watermark remover, erase text from photo, object remover online">
+	<link rel="canonical" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="x-default" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="en" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="es" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="fr" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="vi" href="https://eraser.squoosh.online/" />
+    <link rel="alternate" hreflang="sw" href="https://eraser.squoosh.online/" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght=0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AI Watermark Remover Free",
+      "operatingSystem": "All",
+      "applicationCategory": "MultimediaApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Remove Watermarks with AI Paintbrush",
+        "Erase text, logos, and stamps automatically",
+        "No Quality Loss",
+        "100% Free and Secure"
+      ]
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .canvas-container {
+            position: relative;
+            max-width: 100%;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            touch-action: none;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Global Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <div class="bg-primary-600 text-white p-2 rounded-xl shadow-md shadow-primary-500/20">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">
+                    EraserAI
+                </span>
+            </a>
+
+            <!-- Navigation & Actions -->
+            <div class="flex items-center space-x-4">
+                <!-- Language Selector -->
+                <div class="relative inline-block text-left" id="langDropdown">
+                    <button id="langBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm font-medium">
+                        <i data-lucide="languages" class="w-4 h-4"></i>
+                        <span id="currentLangLabel">English</span>
+                        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <!-- Dropdown Panel -->
+                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 py-1 text-sm z-50">
+                        <button onclick="changeLanguage('en')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
+                            <span>English</span><span class="text-xs text-slate-400">Global</span>
+                        </button>
+                        <button onclick="changeLanguage('es')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
+                            <span>Español</span><span class="text-xs text-slate-400">Europe/LatAm</span>
+                        </button>
+                        <button onclick="changeLanguage('fr')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
+                            <span>Français</span><span class="text-xs text-slate-400">Africa/Europe</span>
+                        </button>
+                        <button onclick="changeLanguage('zh')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
+                            <span>中文</span><span class="text-xs text-slate-400">亚洲</span>
+                        </button>
+                        <button onclick="changeLanguage('vi')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
+                            <span>Tiếng Việt</span><span class="text-xs text-slate-400">Đông Nam Á</span>
+                        </button>
+                        <button onclick="changeLanguage('sw')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
+                            <span>Kiswahili</span><span class="text-xs text-slate-400">Afrika</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero & Title Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6 text-center">
+            <div class="inline-flex items-center space-x-2 bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold mb-6">
+                <span class="flex h-2 w-2 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                </span>
+                <span data-i18n="badge">100% Free & Unlimited AI Object Removal</span>
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4" id="mainH1">
+                <span data-i18n="title">Free AI Watermark Remover Online</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-500 dark:text-slate-400" data-i18n="subtitle">
+                Erase watermark text, logos, stamps, people, or clean any photo with precision using advanced image-to-image AI.
+            </p>
+        </section>
+
+        <!-- Main Workspace (Interactive App Section) -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-150 dark:border-slate-700/50 overflow-hidden">
+                
+                <!-- Hidden file input to prevent event bubbling conflicts -->
+                <input type="file" id="fileInput" accept="image/*" class="hidden">
+
+                <!-- Upload State -->
+                <div id="uploadView" class="p-8 sm:p-16 flex flex-col items-center justify-center text-center">
+                    <div id="dropZone" class="w-full max-w-3xl border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-2xl p-8 sm:p-12 transition cursor-pointer flex flex-col items-center justify-center bg-slate-50/50 dark:bg-slate-900/20">
+                        <div class="bg-primary-100 dark:bg-primary-950/50 p-4 rounded-full text-primary-600 dark:text-primary-400 mb-4">
+                            <i data-lucide="cloud-upload" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-1" data-i18n="dragTitle">Drag & Drop your image here</h3>
+                        <p class="text-sm text-slate-400 mb-4" data-i18n="dragSubtitle">Supports PNG, JPG, JPEG, WEBP</p>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium px-6 py-2.5 rounded-xl shadow-lg shadow-primary-500/20 transition flex items-center space-x-2 pointer-events-none">
+                            <i data-lucide="image" class="w-4 h-4"></i>
+                            <span data-i18n="browseBtn">Browse Local Files</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Editor State -->
+                <div id="editorView" class="hidden flex flex-col lg:flex-row h-auto lg:h-[650px]">
+                    <!-- Interactive Canvas Area -->
+                    <div class="flex-grow bg-slate-100 dark:bg-slate-950 p-4 sm:p-6 flex flex-col items-center justify-center relative min-h-[350px] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800">
+                        <!-- Canvas Container -->
+                        <div id="canvasWrapper" class="canvas-container bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 max-w-full max-h-full">
+                            <canvas id="editorCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Toolbar / Control Panel -->
+                    <div class="w-full lg:w-96 p-6 flex flex-col justify-between bg-white dark:bg-slate-800">
+                        <div>
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-700">
+                                <h3 class="font-bold text-lg flex items-center space-x-2">
+                                    <i data-lucide="sliders" class="w-5 h-5 text-primary-500"></i>
+                                    <span data-i18n="workspaceTitle">AI Control Panel</span>
+                                </h3>
+                                <button onclick="resetEditor()" class="text-xs text-red-500 hover:text-red-600 font-semibold flex items-center space-x-1">
+                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    <span data-i18n="clearBtn">Start Over</span>
+                                </button>
+                            </div>
+
+                            <!-- Brush Size Control -->
+                            <div class="mb-6">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-semibold flex items-center space-x-1.5">
+                                        <i data-lucide="paint-brush" class="w-4 h-4 text-slate-400"></i>
+                                        <span data-i18n="brushSize">Brush Size</span>
+                                    </label>
+                                    <span id="brushSizeVal" class="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-md">25px</span>
+                                </div>
+                                <input type="range" id="brushSizeSlider" min="5" max="100" value="25" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary-600">
+                                <p class="text-xs text-slate-400 mt-1.5" data-i18n="brushHint">Scribble directly on the watermark, text or logo to erase it.</p>
+                            </div>
+
+                            <!-- Text/Refinement Prompt Area -->
+                            <div class="mb-6">
+                                <label class="block text-sm font-semibold mb-2 flex items-center space-x-1.5">
+                                    <i data-lucide="keyboard" class="w-4 h-4 text-slate-400"></i>
+                                    <span data-i18n="promptLabel">Specify what to remove (Optional)</span>
+                                </label>
+                                <textarea id="promptInput" rows="3" class="w-full text-sm p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition placeholder-slate-400" placeholder="e.g., watermark in the bottom right corner, text logo, stamp..."></textarea>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="space-y-3">
+                                <button id="processBtn" class="w-full bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-primary-500/25 transition flex items-center justify-center space-x-2">
+                                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                                    <span data-i18n="processBtnText">Remove Watermark</span>
+                                </button>
+                                
+                                <button id="undoBtn" class="w-full border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 font-medium py-2 px-6 rounded-xl transition flex items-center justify-center space-x-2 text-sm">
+                                    <i data-lucide="undo-2" class="w-4 h-4"></i>
+                                    <span data-i18n="undoBtn">Undo Stroke</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Footer Info in Sidebar -->
+                        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 text-xs text-slate-400 flex items-center justify-between">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i>
+                                <span data-i18n="secureHint">Secure Connection</span>
+                            </span>
+                            <span data-i18n="freeUnlimited">Unlimited Free</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Loading View -->
+                <div id="loadingView" class="hidden p-12 sm:p-24 flex flex-col items-center justify-center text-center">
+                    <div class="relative mb-6">
+                        <div class="w-16 h-16 border-4 border-primary-100 border-t-primary-600 rounded-full animate-spin"></div>
+                        <i data-lucide="sparkles" class="w-6 h-6 text-primary-500 absolute top-5 left-5 animate-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 animate-pulse" data-i18n="processingTitle">AI Erasing in Progress...</h3>
+                    <p class="text-slate-400 text-sm max-w-md" data-i18n="processingSubtitle">Analyzing context, filling pixels, and restoring original details dynamically. This may take up to 20 seconds.</p>
+                </div>
+
+                <!-- Result & Preview Section -->
+                <div id="resultView" class="hidden p-6 sm:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- Before Visual -->
+                        <div class="space-y-2">
+                            <span class="text-xs font-semibold uppercase tracking-wider bg-slate-100 dark:bg-slate-700 px-2.5 py-1 rounded-md" data-i18n="previewOriginal">Original Image</span>
+                            <div class="aspect-auto max-h-[400px] overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center bg-slate-50 dark:bg-slate-900">
+                                <img id="originalPreview" src="" alt="Original Watermarked Image" class="max-w-full max-h-[400px] object-contain">
+                            </div>
+                        </div>
+                        <!-- After AI Removal Result -->
+                        <div class="space-y-2">
+                            <span class="text-xs font-semibold uppercase tracking-wider bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 px-2.5 py-1 rounded-md" data-i18n="previewResult">Cleaned Image</span>
+                            <div class="aspect-auto max-h-[400px] overflow-hidden rounded-xl border border-primary-200 dark:border-primary-900 flex items-center justify-center bg-slate-50 dark:bg-slate-900 relative">
+                                <img id="cleanedResult" src="" alt="Watermark Removed AI Image" class="max-w-full max-h-[400px] object-contain">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download & Actions Container -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 border-t border-slate-100 dark:border-slate-700 pt-6">
+                        <button onclick="downloadCleanedImage()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center space-x-2">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                            <span data-i18n="downloadBtn">Download Image (HD)</span>
+                        </button>
+                        <button onclick="backToEdit()" class="w-full sm:w-auto border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium py-3 px-8 rounded-xl transition flex items-center justify-center space-x-2 text-sm">
+                            <i data-lucide="edit-3" class="w-4 h-4"></i>
+                            <span data-i18n="editMore">Keep Editing</span>
+                        </button>
+                        <button onclick="resetEditor()" class="w-full sm:w-auto text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 font-medium py-3 px-6 rounded-xl transition text-sm">
+                            <span data-i18n="uploadNew">Upload New Image</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Custom Warning / Error Modal Alerts -->
+        <div id="customAlert" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700">
+                <div class="flex items-center space-x-3 text-red-500 mb-4">
+                    <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                    <h3 class="font-bold text-lg" id="alertTitle">Attention</h3>
+                </div>
+                <p id="alertMsg" class="text-slate-500 dark:text-slate-400 text-sm mb-6"></p>
+                <div class="flex justify-end">
+                    <button onclick="closeAlert()" class="bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 font-medium text-sm px-5 py-2.5 rounded-xl transition">
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Policy & Information Modal Container -->
+        <div id="policyModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 dark:border-slate-700 flex flex-col max-h-[85vh]">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-150 dark:border-slate-700">
+                    <h3 class="font-bold text-xl flex items-center space-x-2" id="policyModalTitle">
+                        <!-- Dynamic Title Header inside JavaScript -->
+                    </h3>
+                    <button onclick="closePolicyModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <div class="flex-grow overflow-y-auto py-6 text-sm text-slate-600 dark:text-slate-300 space-y-4" id="policyModalBody">
+                    <!-- Dynamic Body content rendered in switch format depending on active language -->
+                </div>
+                <div class="flex justify-end pt-4 border-t border-slate-150 dark:border-slate-700">
+                    <button onclick="closePolicyModal()" class="bg-primary-600 hover:bg-primary-700 text-white font-medium px-5 py-2 rounded-xl transition text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Grid -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200/50 dark:border-slate-800/50">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12" data-i18n="featuresH2">Why Choose EraserAI For Your Images?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition">
+                    <div class="bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2" data-i18n="feat1Title">Instant AI Processing</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="feat1Desc">No tedious layers. Our advanced neural-net detects, isolates, and clears the context seamlessly in milliseconds.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition">
+                    <div class="bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="eye" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2" data-i18n="feat2Title">Lossless Quality Output</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="feat2Desc">Your original image resolution remains untouched. Get sharp, export-ready HD photos completely clean.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition">
+                    <div class="bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="lock" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2" data-i18n="feat3Title">100% Privacy & Security</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="feat3Desc">Images are processed live. We never store, save, or index your original or processed files on remote databases.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic SEO Content Structure (How it Works & FAQ) -->
+        <section class="bg-slate-100/50 dark:bg-slate-950/30 py-16 border-t border-slate-200/50 dark:border-slate-800/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- How to Use -->
+                <div class="mb-16">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-10" data-i18n="howItWorksH2">How To Remove Watermark From Image Online</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-primary-600 text-white font-bold rounded-full flex items-center justify-center mx-auto mb-3">1</div>
+                            <h4 class="font-bold mb-1" data-i18n="step1Title">Upload File</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="step1Desc">Drag/drop or select an image from your mobile, tablet, or desktop.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-primary-600 text-white font-bold rounded-full flex items-center justify-center mx-auto mb-3">2</div>
+                            <h4 class="font-bold mb-1" data-i18n="step2Title">Brush Watermark</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="step2Desc">Use the red mask brush over watermarks, labels, logos, or stamp areas.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-primary-600 text-white font-bold rounded-full flex items-center justify-center mx-auto mb-3">3</div>
+                            <h4 class="font-bold mb-1" data-i18n="step3Title">Clean & Export</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="step3Desc">Hit processing and let the AI instantly redraw and deliver your HD image.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Snippet for search engines -->
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8" data-i18n="faqTitle">Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
+                            <h4 class="font-bold mb-2 text-base" data-i18n="q1">Is this AI Watermark Remover totally free?</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="a1">Yes! Our service is 100% free with no registration, no token limits, and no trial limits. You can process as many images as you need.</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
+                            <h4 class="font-bold mb-2 text-base" data-i18n="q2">Does watermark removal affect photo resolution?</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="a2">No, our state-of-the-art AI edits and removes watermark pixels locally, conserving the exact output height, width, and visual clarity of your original file.</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
+                            <h4 class="font-bold mb-2 text-base" data-i18n="q3">What kinds of file types are supported?</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="a3">We support common digital graphic formats including JPG, JPEG, PNG, and WebP images.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <p>&copy; 2026 <span class="text-slate-200 font-semibold">EraserAI</span>. All rights reserved. Free, simple, fast inpainting.</p>
+                <p class="text-xs text-slate-500 mt-1">Disclaimer: Please ensure you own or hold the copyright of files before removing visual watermarks.</p>
+            </div>
+            <div class="flex space-x-6">
+                <button onclick="openPolicyModal('privacy')" class="hover:text-slate-100 transition" data-i18n="privacy">Privacy Policy</button>
+                <button onclick="openPolicyModal('terms')" class="hover:text-slate-100 transition" data-i18n="terms">Terms of Service</button>
+                <button onclick="openPolicyModal('contact')" class="hover:text-slate-100 transition" data-i18n="contact">Contact</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Logic Script -->
+    <script>
+        // API Configuration
+        const apiKey = "";
+
+        // Translation Dictionary matching geo-targeted regions
+        const i18n = {
+            en: {
+                badge: "100% Free & Unlimited AI Object Removal",
+                title: "Free AI Watermark Remover Online",
+                subtitle: "Erase watermark text, logos, stamps, people, or clean any photo with precision using advanced image-to-image AI.",
+                dragTitle: "Drag & Drop your image here",
+                dragSubtitle: "Supports PNG, JPG, JPEG, WEBP",
+                browseBtn: "Browse Local Files",
+                workspaceTitle: "AI Control Panel",
+                clearBtn: "Start Over",
+                brushSize: "Brush Size",
+                brushHint: "Scribble directly on the watermark, text or logo to erase it.",
+                promptLabel: "Specify what to remove (Optional)",
+                processBtnText: "Remove Watermark",
+                undoBtn: "Undo Stroke",
+                processingTitle: "AI Erasing in Progress...",
+                processingSubtitle: "Analyzing context, filling pixels, and restoring original details dynamically. This may take up to 20 seconds.",
+                previewOriginal: "Original Image",
+                previewResult: "Cleaned Image",
+                downloadBtn: "Download Image (HD)",
+                editMore: "Keep Editing",
+                uploadNew: "Upload New Image",
+                secureHint: "Secure Connection",
+                freeUnlimited: "Unlimited Free",
+                featuresH2: "Why Choose EraserAI For Your Images?",
+                feat1Title: "Instant AI Processing",
+                feat1Desc: "No tedious layers. Our advanced neural-net detects, isolates, and clears the context seamlessly in milliseconds.",
+                feat2Title: "Lossless Quality Output",
+                feat2Desc: "Your original image resolution remains untouched. Get sharp, export-ready HD photos completely clean.",
+                feat3Title: "100% Privacy & Security",
+                feat3Desc: "Images are processed live. We never store, save, or index your original or processed files on remote databases.",
+                howItWorksH2: "How To Remove Watermark From Image Online",
+                step1Title: "Upload File",
+                step1Desc: "Drag/drop or select an image from your mobile, tablet, or desktop.",
+                step2Title: "Brush Watermark",
+                step2Desc: "Use the red mask brush over watermarks, labels, logos, or stamp areas.",
+                step3Title: "Clean & Export",
+                step3Desc: "Hit processing and let the AI instantly redraw and deliver your HD image.",
+                faqTitle: "Frequently Asked Questions",
+                q1: "Is this AI Watermark Remover totally free?",
+                a1: "Yes! Our service is 100% free with no registration, no token limits, and no trial limits. You can process as many images as you need.",
+                q2: "Does watermark removal affect photo resolution?",
+                a2: "No, our state-of-the-art AI edits and removes watermark pixels locally, conserving the exact output height, width, and visual clarity of your original file.",
+                q3: "What kinds of file types are supported?",
+                a3: "We support common digital graphic formats including JPG, JPEG, PNG, and WebP images.",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service",
+                contact: "Contact"
+            },
+            es: {
+                badge: "Eliminador de Objetos por IA 100% Gratis e Ilimitado",
+                title: "Eliminador de Marcas de Agua por IA Gratis",
+                subtitle: "Borre textos, logotipos, sellos, personas de marcas de agua o limpie cualquier foto con precisión utilizando IA avanzada de imagen a imagen.",
+                dragTitle: "Arrastre y suelte su imagen aquí",
+                dragSubtitle: "Compatible con PNG, JPG, JPEG, WEBP",
+                browseBtn: "Explorar Archivos Locales",
+                workspaceTitle: "Panel de Control de IA",
+                clearBtn: "Comenzar de Nuevo",
+                brushSize: "Tamaño del Pincel",
+                brushHint: "Escriba o garabatee directamente sobre la marca de agua, texto o logotipo para borrarlo.",
+                promptLabel: "Especifique qué eliminar (Opcional)",
+                processBtnText: "Eliminar Marca de Agua",
+                undoBtn: "Deshacer Trazo",
+                processingTitle: "Borrando con IA en Progreso...",
+                processingSubtitle: "Analizando contexto, rellenando píxeles y restaurando detalles originales de forma dinámica. Esto puede tardar hasta 20 segundos.",
+                previewOriginal: "Imagen Original",
+                previewResult: "Imagen Limpia",
+                downloadBtn: "Descargar Imagen (HD)",
+                editMore: "Seguir Editando",
+                uploadNew: "Subir Nueva Imagen",
+                secureHint: "Conexión Segura",
+                freeUnlimited: "Gratis Ilimitado",
+                featuresH2: "¿Por Qué Elegir EraserAI Para Sus Imágenes?",
+                feat1Title: "Procesamiento de IA Al Instante",
+                feat1Desc: "Sin capas tediosas. Nuestra red neuronal avanzada detecta, aisla y limpia el contexto sin problemas en milisegundos.",
+                feat2Title: "Salida de Calidad Sin Pérdidas",
+                feat2Desc: "La resolución de su imagen original permanece intacta. Obtenga fotos HD nítidas y listas para exportar completamente limpias.",
+                feat3Title: "100% Privacidad y Seguridad",
+                feat3Desc: "Las imágenes se procesan en vivo. Nunca almacenamos, guardamos ni indexamos sus archivos originales o procesados.",
+                howItWorksH2: "Cómo Quitar Marcas de Agua de una Imagen Online",
+                step1Title: "Subir Archivo",
+                step1Desc: "Arrastre, suelte o seleccione una imagen desde su móvil, tableta o computadora de escritorio.",
+                step2Title: "Pintar Marca de Agua",
+                step2Desc: "Use el pincel de máscara roja sobre las marcas de agua, etiquetas, logotipos o áreas de sellos.",
+                step3Title: "Limpiar y Exportar",
+                step3Desc: "Presione procesar y deje que la IA redibuje y entregue instantáneamente su imagen HD.",
+                faqTitle: "Preguntas Frecuentes",
+                q1: "¿Es este removedor de marcas de agua por IA totalmente gratis?",
+                a1: "¡Sí! Nuestro servicio es 100% gratuito sin registro, sin límites de tokens y sin límites de prueba.",
+                q2: "¿Eliminar la marca de agua afecta la resolución de la foto?",
+                a2: "No, nuestra IA edita y elimina los píxeles de la marca de agua localmente, conservando la altura, el ancho y la claridad visual exactos.",
+                q3: "¿Qué tipos de archivos son compatibles?",
+                a3: "Soportamos formatos gráficos digitales comunes, incluidos JPG, JPEG, PNG y WebP.",
+                privacy: "Política de Privacidad",
+                terms: "Términos de Servicio",
+                contact: "Contacto"
+            },
+            fr: {
+                badge: "Suppression d'Objets IA 100% Gratuite & Illimitée",
+                title: "Effaceur de Filigrane IA Gratuit en Ligne",
+                subtitle: "Effacez les textes, logos, tampons ou personnes sur vos photos avec précision grâce à une IA avancée d'image à image.",
+                dragTitle: "Glissez & Déposez votre image ici",
+                dragSubtitle: "Prend en charge PNG, JPG, JPEG, WEBP",
+                browseBtn: "Parcourir les Fichiers",
+                workspaceTitle: "Panneau de Contrôle IA",
+                clearBtn: "Recommencer",
+                brushSize: "Taille du Pinceau",
+                brushHint: "Gribouillez directement sur le filigrane, le texte ou le logo pour l'effacer.",
+                promptLabel: "Spécifiez quoi supprimer (Optionnel)",
+                processBtnText: "Supprimer le Filigrane",
+                undoBtn: "Annuler le Trait",
+                processingTitle: "Suppression par IA en cours...",
+                processingSubtitle: "Analyse du contexte, remplissage des pixels et restauration dynamique des détails. Cela peut prendre jusqu'à 20 secondes.",
+                previewOriginal: "Image Originale",
+                previewResult: "Image Nettoyée",
+                downloadBtn: "Télécharger l'Image (HD)",
+                editMore: "Continuer l'Édition",
+                uploadNew: "Importer une Nouvelle Image",
+                secureHint: "Connexion Sécurisée",
+                freeUnlimited: "Gratuit Illimité",
+                featuresH2: "Pourquoi Choisir EraserAI Pour Vos Images ?",
+                feat1Title: "Traitement IA Instantané",
+                feat1Desc: "Pas de calques complexes. Notre réseau neuronal détecte, isole et nettoie le contexte de manière fluide.",
+                feat2Title: "Qualité de Sortie Sans Perte",
+                feat2Desc: "La résolution d'origine reste intacte. Au format HD, vos photos sortent parfaitement propres.",
+                feat3Title: "Confidentialité 100% Garantie",
+                feat3Desc: "Les images sont traitées en direct. Nous ne stockons et n'indexons jamais vos fichiers.",
+                howItWorksH2: "Comment Supprimer un Filigrane en Ligne",
+                step1Title: "Importer un Fichier",
+                step1Desc: "Glissez-déposez ou sélectionnez une image depuis votre appareil mobile ou ordinateur.",
+                step2Title: "Peindre le Filigrane",
+                step2Desc: "Passez le pinceau rouge sur les filigranes, étiquettes, logos ou tampons.",
+                step3Title: "Nettoyer & Exporter",
+                step3Desc: "Cliquez sur traiter pour laisser l'IA redessiner et exporter instantanément en HD.",
+                faqTitle: "Foire Aux Questions",
+                q1: "Cet effaceur de filigrane IA est-il vraiment gratuit ?",
+                a1: "Oui ! Notre service est 100% gratuit, sans inscription, sans limite de jetons et sans essai payant.",
+                q2: "La suppression du filigrane affecte-t-elle la résolution ?",
+                a2: "Non, notre IA modifie les pixels localement et conserve exactement les dimensions et la clarté de votre photo.",
+                q3: "Quels formats d'image sont acceptés ?",
+                a3: "Nous prenons en charge les formats graphiques courants : JPG, JPEG, PNG et WebP.",
+                privacy: "Politique de Confidentialité",
+                terms: "Conditions d'Utilisation",
+                contact: "Contact"
+            },
+            zh: {
+                badge: "100% 免费且无限制的 AI 图像去水印工具",
+                title: "免费 AI 在线图片去水印",
+                subtitle: "使用先进的 AI 图像到图像技术，精准擦除图片中的水印文字、徽标、图章、路人或任何多余物体。",
+                dragTitle: "拖放您的图片到这里",
+                dragSubtitle: "支持 PNG, JPG, JPEG, WEBP 格式",
+                browseBtn: "浏览本地文件",
+                workspaceTitle: "AI 控制面板",
+                clearBtn: "重新开始",
+                brushSize: "画笔大小",
+                brushHint: "直接在水印、文字或 Logo 上进行涂抹涂红即可擦除。",
+                promptLabel: "指定需要去除的内容 (选填)",
+                processBtnText: "立即去除水印",
+                undoBtn: "撤销涂抹",
+                processingTitle: "AI 擦除处理中...",
+                processingSubtitle: "正在动态分析上下文、填补像素并完美还原原始图像。这可能需要多达 20 秒。",
+                previewOriginal: "原始图像",
+                previewResult: "去水印效果图",
+                downloadBtn: "下载无损高清图片",
+                editMore: "继续编辑",
+                uploadNew: "上传新图片",
+                secureHint: "安全加密连接",
+                freeUnlimited: "完全免费无限制",
+                featuresH2: "为什么选择 EraserAI 去水印？",
+                feat1Title: "极速 AI 处理",
+                feat1Desc: "无需繁琐图层。我们的先进神经网络算法可在毫秒内检测、分离并无缝清除内容。",
+                feat2Title: "无损画质输出",
+                feat2Desc: "您的原图分辨率将被完好保留。获取高画质、完美干净、立即可用的高清照片。",
+                feat3Title: "100% 隐私与安全",
+                feat3Desc: "所有图像均在线即时处理。我们绝不会存储、保存或索引您的任何原始文件或结果文件。",
+                howItWorksH2: "如何在图片中在线去除水印",
+                step1Title: "上传图片",
+                step1Desc: "通过手机、平板或电脑桌面将图片拖入或选择上传。",
+                step2Title: "涂抹水印",
+                step2Desc: "使用红色标记画笔涂抹覆盖水印、标签、徽标或图章区域。",
+                step3Title: "擦除并下载",
+                step3Desc: "点击处理，AI 即可立即重绘并输出无水印的高清图片。",
+                faqTitle: "常见问题解答",
+                q1: "这个 AI 去水印工具真的完全免费吗？",
+                a1: "是的！我们的服务 100% 免费，无需注册账号，没有配额限制，也没有任何隐藏付费试用。",
+                q2: "去水印会降低我的照片清晰度吗？",
+                a2: "不会。我们的 AI 在局部进行细节计算和擦除，完美保留原始分辨率和色彩质感。",
+                q3: "支持哪些图片格式？",
+                a3: "我们支持主流的数字图形格式，包括 JPG、JPEG、PNG 以及 WebP 格式。",
+                privacy: "隐私政策",
+                terms: "服务条款",
+                contact: "联系我们"
+            },
+            vi: {
+                badge: "Xóa Vật Thể Bằng AI 100% Miễn Phí & Không Giới Hạn",
+                title: "Công Cụ Xóa Watermark Bằng AI Miễn Phí",
+                subtitle: "Xóa chữ, logo, nhãn dán, người không mong muốn hoặc dọn sạch bất kỳ bức ảnh nào một cách chính xác bằng công nghệ AI nâng cao.",
+                dragTitle: "Kéo & Thả ảnh của bạn vào đây",
+                dragSubtitle: "Hỗ trợ định dạng PNG, JPG, JPEG, WEBP",
+                browseBtn: "Chọn Ảnh Từ Thiết Bị",
+                workspaceTitle: "Bảng Điều Khiển AI",
+                clearBtn: "Làm Lại Từ Đầu",
+                brushSize: "Kích Thước Cọ",
+                brushHint: "Tô vẽ trực tiếp lên watermark, văn bản hoặc logo để xóa bỏ.",
+                promptLabel: "Chỉ định nội dung cần xóa (Tùy chọn)",
+                processBtnText: "Tiến Hành Xóa",
+                undoBtn: "Hoàn Tác Nét Vẽ",
+                processingTitle: "AI Đang Tiến Hành Xóa...",
+                processingSubtitle: "Đang phân tích bối cảnh, lấp đầy điểm ảnh và tái tạo các chi tiết gốc. Quá trình này có thể mất tới 20 giây.",
+                previewOriginal: "Ảnh Gốc",
+                previewResult: "Ảnh Đã Xóa Sạch",
+                downloadBtn: "Tải Ảnh HD",
+                editMore: "Tiếp Tục Chỉnh Sửa",
+                uploadNew: "Tải Lên Ảnh Mới",
+                secureHint: "Kết Nối Bảo Mật",
+                freeUnlimited: "Miễn Phí Không Giới Hạn",
+                featuresH2: "Tại Sao Nên Chọn EraserAI Cho Ảnh Của Bạn?",
+                feat1Title: "Xử Lý AI Tức Thì",
+                feat1Desc: "Không cần lớp phức tạp. Mạng thần kinh tiên tiến phát hiện, cô lập và dọn sạch hình ảnh một cách mượt mà.",
+                feat2Title: "Không Suy Giảm Chất Lượng",
+                feat2Desc: "Độ phân giải ban đầu vẫn nguyên vẹn. Nhận những bức ảnh HD sắc nét, sẵn sàng xuất bản hoàn toàn sạch sẽ.",
+                feat3Title: "Bảo Mật & Riêng Tư 100%",
+                feat3Desc: "Ảnh được xử lý trực tiếp. Chúng tôi không bao giờ lưu trữ hay lập chỉ mục các file gốc hoặc file đã xử lý.",
+                howItWorksH2: "Cách Xóa Watermark Trên Ảnh Trực Tuyến",
+                step1Title: "Tải Lên Ảnh",
+                step1Desc: "Kéo/thả hoặc chọn ảnh từ điện thoại, máy tính bảng hoặc máy tính của bạn.",
+                step2Title: "Tô Lên Watermark",
+                step2Desc: "Sử dụng cọ vẽ màu đỏ đè lên watermark, logo hoặc nhãn dán cần xóa.",
+                step3Title: "Xóa & Tải Về",
+                step3Desc: "Nhấn nút xử lý để AI ngay lập tức vẽ lại và xuất file ảnh HD sạch đẹp cho bạn.",
+                faqTitle: "Câu Hỏi Thường Gặp",
+                q1: "Công cụ xóa watermark AI này có thực sự miễn phí?",
+                a1: "Đúng vậy! Dịch vụ của chúng tôi 100% miễn phí, không cần đăng ký tài khoản, không giới hạn lượt dùng.",
+                q2: "Việc xóa watermark có làm giảm độ phân giải của ảnh không?",
+                a2: "Không, AI của chúng tôi chỉ chỉnh sửa các pixel cục bộ, giữ nguyên kích thước chiều rộng, chiều cao gốc của ảnh.",
+                q3: "Những loại tệp nào được hỗ trợ?",
+                a3: "Chúng tôi hỗ trợ các định dạng đồ họa phổ biến nhất bao gồm JPG, JPEG, PNG và WebP.",
+                privacy: "Chính Sách Riêng Tư",
+                terms: "Điều Khoản Dịch Vụ",
+                contact: "Liên Hệ"
+            },
+            sw: {
+                badge: "Ondoa Vitu Kwenye Picha Bure na Bila Kikomo kwa AI",
+                title: "Kifutaji Alama ya Maji (Watermark) cha AI Bure",
+                subtitle: "Futa maandishi, nembo, mihuri, watu au safisha picha yoyote kwa usahihi wa hali ya juu ukitumia teknologi ya kisasa ya picha kwa picha ya AI.",
+                dragTitle: "Buruta na uweke picha yako hapa",
+                dragSubtitle: "Inasaidia PNG, JPG, JPEG, WEBP",
+                browseBtn: "Chagua Faili za Ndani",
+                workspaceTitle: "Jopo la AI la Udhibiti",
+                clearBtn: "Anza Upya",
+                brushSize: "Ukubwa wa Brashi",
+                brushHint: "Paka rangi moja kwa moja juu ya alama ya maji, maandishi au nembo ili kuifuta.",
+                promptLabel: "Taja unachotaka kuondoa (Si Lazima)",
+                processBtnText: "Ondoa Sasa",
+                undoBtn: "Batilisha Mstari",
+                processingTitle: "AI Inaondoa Sasa...",
+                processingSubtitle: "Inachambua muktadha, inajaza saizi za picha, na kurudisha maelezo ya asili kwa sekunde chache.",
+                previewOriginal: "Picha ya Asili",
+                previewResult: "Picha Iliyosafishwa",
+                downloadBtn: "Pakua Picha (HD)",
+                editMore: "Endelea Kuhariri",
+                uploadNew: "Pakia Picha Mpya",
+                secureHint: "Muunganisho Salama",
+                freeUnlimited: "Bila Kikomo Bure",
+                featuresH2: "Kwa Nini Uchague EraserAI Kwa Picha Zako?",
+                feat1Title: "Usindikaji wa Papo Hapo",
+                feat1Desc: "Hakuna tabaka ngumu. Mtandao wetu wa hali ya juu hugundua na kuondoa alama kwa urahisi zaidi.",
+                feat2Title: "Ubora Bila Kupotea",
+                feat2Desc: "Azimio asili la picha yako linabaki salama. Pata picha safi kabisa katika ubora wa HD.",
+                feat3Title: "Faragha na Usalama 100%",
+                feat3Desc: "Picha zinasindikwa moja kwa moja. Hatuhifadhi picha zako asili wala zilizosindikwa.",
+                howItWorksH2: "Jinsi ya Kuondoa Alama ya Maji Mkondoni",
+                step1Title: "Pakia Faili",
+                step1Desc: "Buruta na udondoshe au chagua picha kutoka kwa simu, kibao, au kompyuta yako.",
+                step2Title: "Paka Rangi Alama",
+                step2Desc: "Tumia brashi ya rangi nyekundu kufunika alama ya maji, lebo, nembo au muhuri.",
+                step3Title: "Safisha & Pakua",
+                step3Desc: "Bonyeza kitufe cha usindikaji ili kuruhusu AI kuchora upya na kutoa picha safi ya HD.",
+                faqTitle: "Maswali Yanayoulizwa Mara kwa Mara",
+                q1: "Je, kifaa hiki cha AI ni bure kabisa?",
+                a1: "Ndiyo! Huduma yetu ni bure 100% bila usajili, hakuna kikomo cha tokeni na hakuna majaribio ya kulipia.",
+                q2: "Je, kuondoa alama ya maji kunaathiri ubora wa picha?",
+                a2: "Hapana, AI yetu inahariri saizi za picha za asili ndani ya eneo lililopakwa rangi pekee, ikihifadhi upana na urefu ule ule.",
+                q3: "Ni aina gani za faili zinazoungwa mkono?",
+                a3: "Tunasaidia faili maarufu za picha ikiwa ni pamoja na JPG, JPEG, PNG, na WebP.",
+                privacy: "Sera ya Faragha",
+                terms: "Sheria na Masharti",
+                contact: "Wasiliana Nasi"
+            }
+        };
+
+        // Policy localized rendering lists
+        const policyContent = {
+            en: {
+                privacyTitle: "Privacy Policy",
+                privacyBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Your privacy is our utmost priority.</p>
+                    <p>At EraserAI, we operate with a strict <strong>Zero Logs Policy</strong>. All image streaming processing happens live over encrypted secure pipelines directly communicating with the advanced AI engine. We never store, cache, share, or sell your uploaded photos or processed creations.</p>
+                    <p>No account creation, cookies tracking, or personalized registration is required to use this tool, making your interaction entirely secure and anonymous.</p>
+                    <p>In compliance with international standards including GDPR (EU) and CCPA (USA), you remain in complete ownership and control of your graphics data.</p>
+                `,
+                termsTitle: "Terms of Service",
+                termsBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Welcome to EraserAI.</p>
+                    <p>By using our AI watermark removal utility, you agree to the following terms:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>You must own the absolute copyrights, legal authorizations, or edit permissions of files before erasing any visual elements, labels, or watermarks.</li>
+                        <li>This tool is provided entirely for fair use, personal edit restoration, graphic cleaning, and valid creative workflows. Any malicious copyright infringement is strictly prohibited.</li>
+                        <li>EraserAI holds no legal liability or responsibility for unauthorized graphic manipulations executed by users.</li>
+                    </ul>
+                `,
+                contactTitle: "Contact Us",
+                contactBody: `
+                    <div class="space-y-4">
+                        <p>Need support, business cooperation, or have questions regarding our automated image cleanup capabilities?</p>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
+                            <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">Official Email</span>
+                            <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
+                        </div>
+                        <p class="text-xs text-slate-400">Our customer assistance team generally responds to all valid queries within 24-48 business hours.</p>
+                    </div>
+                `
+            },
+            es: {
+                privacyTitle: "Política de Privacidad",
+                privacyBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Su privacidad es nuestra máxima prioridad.</p>
+                    <p>En EraserAI operamos bajo una estricta <strong>política de cero registros</strong>. Todo el procesamiento se realiza en vivo a través de conexiones seguras y cifradas directamente con el motor de IA. Nunca guardamos, almacenamos en caché ni compartimos sus archivos.</p>
+                    <p>No se requiere registro, creación de cuentas ni seguimiento mediante cookies para usar esta herramienta, garantizando una experiencia anónima y segura.</p>
+                    <p>De acuerdo con regulaciones como el RGPD, usted mantiene la propiedad y control total de sus datos gráficos en todo momento.</p>
+                `,
+                termsTitle: "Términos de Servicio",
+                termsBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Bienvenido a EraserAI.</p>
+                    <p>Al utilizar nuestra herramienta de eliminación de marcas de agua, acepta las siguientes condiciones:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Debe poseer los derechos de autor legítimos o contar con los permisos necesarios de edición de los archivos antes de borrar cualquier marca de agua o logotipo.</li>
+                        <li>Esta herramienta está destinada exclusivamente a un uso legítimo, restauración de imágenes personales y flujos de trabajo de limpieza gráfica.</li>
+                        <li>EraserAI no asume ninguna responsabilidad legal por manipulaciones no autorizadas realizadas por los usuarios.</li>
+                    </ul>
+                `,
+                contactTitle: "Contacto",
+                contactBody: `
+                    <div class="space-y-4">
+                        <p>¿Tiene alguna pregunta, propuesta de colaboración o requiere soporte técnico?</p>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
+                            <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">Correo Electrónico Oficial</span>
+                            <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
+                        </div>
+                        <p class="text-xs text-slate-400">Nuestro equipo de soporte suele responder a todas las consultas válidas en un plazo de 24 a 48 horas laborables.</p>
+                    </div>
+                `
+            },
+            fr: {
+                privacyTitle: "Politique de Confidentialité",
+                privacyBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Votre vie privée est notre priorité absolue.</p>
+                    <p>EraserAI applique une <strong>politique stricte de non-conservation des journaux</strong>. Le traitement des images s'effectue en direct via des protocoles sécurisés et chiffrés. Vos fichiers ne sont jamais sauvegardés, mis en cache ou partagés.</p>
+                    <p>L'utilisation de cet outil ne requiert aucune inscription, création de compte ou suivi par cookies, garantissant un anonymat total.</p>
+                    <p>Conformément au RGPD européen, vous restez l'unique propriétaire de vos données visuelles.</p>
+                `,
+                termsTitle: "Conditions d'Utilisation",
+                termsBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Bienvenue sur EraserAI.</p>
+                    <p>En utilisant nos services d'inpainting IA, vous acceptez les conditions suivantes :</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Vous devez détenir les droits d'auteur ou les autorisations nécessaires avant de modifier une image pour y supprimer un filigrane ou un logo.</li>
+                        <li>Cet outil est destiné exclusivement à un usage équitable, personnel ou professionnel de nettoyage et d'édition créative.</li>
+                        <li>EraserAI décline toute responsabilité en cas d'utilisation non autorisée ou frauduleuse de son service.</li>
+                    </ul>
+                `,
+                contactTitle: "Contactez-nous",
+                contactBody: `
+                    <div class="space-y-4">
+                        <p>Besoin d'aide, de renseignements ou d'un partenariat commercial ?</p>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
+                            <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">E-mail Officiel</span>
+                            <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
+                        </div>
+                        <p class="text-xs text-slate-400">Notre équipe s'engage à vous répondre sous un délai de 24 à 48 heures ouvrables.</p>
+                    </div>
+                `
+            },
+            zh: {
+                privacyTitle: "隐私政策",
+                privacyBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">您的隐私安全对我们至关重要。</p>
+                    <p>在 EraserAI，我们实行严格的<strong>无日志政策</strong>。所有的图片在通过加密隧道上传后将直接流式传输给先进的AI处理器，并由实时反馈，我们绝不在服务器端存储、缓存、共享或销售您的原始及结果图片。</p>
+                    <p>使用本工具无需创建账号、绑定邮箱或使用 Cookies 进行个人偏好追踪，确保您的每一次处理都100%匿名且安全。</p>
+                    <p>我们严格符合 GDPR 及国际隐私保护标准，您的图像所有权及控制权始终属于您自己。</p>
+                `,
+                termsTitle: "服务条款",
+                termsBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">欢迎使用 EraserAI。</p>
+                    <p>使用我们的去水印或图像擦除工具，即代表您同意并接受以下条款约束：</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>在涂抹或去除图片中的水印、Logo或图章前，您必须确认自身拥有该图片的高清版权、合法修改权或已获得相关授权。</li>
+                        <li>本工具仅限用于个人修图还原、合法商业图像清洁、美术设计辅助等合理使用场景。严禁用于任何侵犯版权的非法用途。</li>
+                        <li>EraserAI 不对用户因任何未经授权的图片修改或传播行为所产生的法律纠纷承担任何责任。</li>
+                    </ul>
+                `,
+                contactTitle: "联系我们",
+                contactBody: `
+                    <div class="space-y-4">
+                        <p>如果您在使用中遇到问题、有商务合作意向，或想反馈去水印功能建议，请通过以下方式联系：</p>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
+                            <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">官方支持邮箱</span>
+                            <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
+                        </div>
+                        <p class="text-xs text-slate-400">我们的用户支持团队一般会在24至48个工作小时内对有效的邮件进行答复与协助。</p>
+                    </div>
+                `
+            },
+            vi: {
+                privacyTitle: "Chính Sách Riêng Tư",
+                privacyBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Quyền riêng tư của bạn là ưu tiên hàng đầu của chúng tôi.</p>
+                    <p>Tại EraserAI, chúng tôi áp dụng <strong>chính sách không lưu nhật ký</strong> nghiêm ngặt. Việc xử lý hình ảnh được truyền trực tiếp qua cổng bảo mật đến máy chủ AI. Chúng tôi không bao giờ sao lưu hay lưu trữ hình ảnh của bạn.</p>
+                    <p>Sử dụng ứng dụng không cần đăng ký tài khoản hoặc theo dõi cookie cá nhân, đảm bảo trải nghiệm an toàn tuyệt đối.</p>
+                    <p>Tuân thủ tuyệt đối các tiêu chuẩn GDPR quốc tế, giúp bảo vệ quyền sở hữu nội dung số của bạn.</p>
+                `,
+                termsTitle: "Điều Khoản Dịch Vụ",
+                termsBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Chào mừng bạn đến với EraserAI.</p>
+                    <p>Bằng việc truy cập và sử dụng dịch vụ xóa watermark của chúng tôi, bạn đồng ý với các điều khoản:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Bạn phải sở hữu bản quyền hợp pháp hoặc sự đồng ý chỉnh sửa hình ảnh trước khi tiến hành xóa watermark.</li>
+                        <li>Công cụ được sử dụng cho mục đích hợp pháp, chỉnh sửa ảnh cá nhân, khôi phục ảnh hoặc tối ưu hóa thiết kế đồ họa.</li>
+                        <li>EraserAI không chịu trách nhiệm pháp lý đối với bất kỳ hành vi chỉnh sửa trái phép nào của người dùng.</li>
+                    </ul>
+                `,
+                contactTitle: "Liên Hệ Chúng Tôi",
+                contactBody: `
+                    <div class="space-y-4">
+                        <p>Nếu bạn cần hỗ trợ kỹ thuật hoặc có đề xuất hợp tác thương mại, vui lòng liên hệ:</p>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
+                            <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">Hòm Thư Hỗ Trợ</span>
+                            <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
+                        </div>
+                        <p class="text-xs text-slate-400">Đội ngũ phản hồi của chúng tôi sẽ hỗ trợ giải đáp mọi thắc mắc trong vòng 24-48 giờ làm việc.</p>
+                    </div>
+                `
+            },
+            sw: {
+                privacyTitle: "Sera ya Faragha",
+                privacyBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Faragha yako ni kipaumbele chetu kikuu.</p>
+                    <p>Katika EraserAI, tunafanya kazi kwa kufuata <strong>Sera ya Kutohifadhi Kumbukumbu</strong>. Usindikaji wa picha zote hufanyika moja kwa moja kupitia njia salama na zilizosimbwa hadi kwenye mtandao wetu wa AI. Hatuhifadhi picha zako asili wala zilizosindikwa.</p>
+                    <p>Hakuna haja ya kujisajili wala kufuatiliwa kwa kuki ili kutumia kifaa hiki, na kukufanya uwe salama kabisa na usiyejulikana.</p>
+                    <p>Kulingana na viwango vya kimataifa vya GDPR na CCPA, unabaki kuwa mmiliki kamili wa data yako ya picha.</p>
+                `,
+                termsTitle: "Sheria na Masharti",
+                termsBody: `
+                    <p class="font-semibold text-slate-800 dark:text-white">Karibu kwenye EraserAI.</p>
+                    <p>Kwa kutumia kifaa chetu cha AI cha kuondoa alama za maji, unakubali masharti yafuatayo:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Lazima uwe mmiliki halali au uwe na ruhusa ya kuhariri faili kabla ya kufuta alama ya maji au nembo yoyote.</li>
+                        <li>Kifaa hiki kimetengenezwa kwa matumizi ya kisheria na ya haki pekee, kama kusafisha picha binafsi na kurudisha ubora.</li>
+                        <li>EraserAI haitawajibika kisheria kwa uhariri wowote usioidhinishwa uliofanywa na watumiaji wetu.</li>
+                    </ul>
+                `,
+                contactTitle: "Wasiliana Nasi",
+                contactBody: `
+                    <div class="space-y-4">
+                        <p>Je, unahitaji msaada, ushirikiano wa kibiashara, au una swali kuhusu huduma yetu?</p>
+                        <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
+                            <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">Barua Pepe Rasmi</span>
+                            <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
+                        </div>
+                        <p class="text-xs text-slate-400">Timu yetu ya msaada kwa wateja hujibu barua pepe halali ndani ya saa 24-48 za kazi.</p>
+                    </div>
+                `
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Set up Lucide Icons
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initTheme();
+            setupLangDropdown();
+            setupDragAndDrop();
+            applyLanguage();
+        });
+
+        // Theme management
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+
+        // Language Selector functionality
+        function setupLangDropdown() {
+            const dropdown = document.getElementById('langDropdown');
+            const btn = document.getElementById('langBtn');
+            const menu = document.getElementById('langMenu');
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const labels = {
+                en: "English",
+                es: "Español",
+                fr: "Français",
+                zh: "中文",
+                vi: "Tiếng Việt",
+                sw: "Kiswahili"
+            };
+            document.getElementById('currentLangLabel').innerText = labels[lang];
+            applyLanguage();
+            
+            // Dynamically change HTML lang attribute for localized SEO
+            document.documentElement.setAttribute('lang', lang);
+        }
+
+        function applyLanguage() {
+            const dict = i18n[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.innerText = dict[key];
+                }
+            });
+
+            // Handle placeholders
+            const promptInput = document.getElementById('promptInput');
+            if (currentLang === 'zh') {
+                promptInput.placeholder = "例如：右下角的水印、文字徽标、多余的印章...";
+            } else if (currentLang === 'es') {
+                promptInput.placeholder = "ej., marca de agua en la esquina inferior derecha, logotipo, sello...";
+            } else if (currentLang === 'fr') {
+                promptInput.placeholder = "ex: filigrane dans le coin inférieur droit, logo texte, tampon...";
+            } else if (currentLang === 'vi') {
+                promptInput.placeholder = "Ví dụ: hình mờ ở góc dưới cùng bên phải, văn bản logo, nhãn dán...";
+            } else if (currentLang === 'sw') {
+                promptInput.placeholder = "Mfano: alama ya maji kwenye kona ya chini kulia, nembo ya maandishi, muhuri...";
+            } else {
+                promptInput.placeholder = "e.g., watermark in the bottom right corner, text logo, stamp...";
+            }
+        }
+
+        // Custom Modal Alert instead of native alert()
+        function showAlert(title, message) {
+            document.getElementById('alertTitle').innerText = title;
+            document.getElementById('alertMsg').innerText = message;
+            document.getElementById('customAlert').classList.remove('hidden');
+        }
+
+        function closeAlert() {
+            document.getElementById('customAlert').classList.add('hidden');
+        }
+
+        // Policy Dynamic Modal Handlers
+        function openPolicyModal(type) {
+            const modal = document.getElementById('policyModal');
+            const titleEl = document.getElementById('policyModalTitle');
+            const bodyEl = document.getElementById('policyModalBody');
+            
+            const trans = policyContent[currentLang] || policyContent['en'];
+            
+            if (type === 'privacy') {
+                titleEl.innerHTML = `<i data-lucide="shield-check" class="w-5 h-5 text-primary-500"></i><span>${trans.privacyTitle}</span>`;
+                bodyEl.innerHTML = trans.privacyBody;
+            } else if (type === 'terms') {
+                titleEl.innerHTML = `<i data-lucide="scale" class="w-5 h-5 text-primary-500"></i><span>${trans.termsTitle}</span>`;
+                bodyEl.innerHTML = trans.termsBody;
+            } else if (type === 'contact') {
+                titleEl.innerHTML = `<i data-lucide="mail" class="w-5 h-5 text-primary-500"></i><span>${trans.contactTitle}</span>`;
+                bodyEl.innerHTML = trans.contactBody;
+            }
+            
+            modal.classList.remove('hidden');
+            lucide.createIcons(); // Hydrate the newly injected Lucide icons inside modal
+        }
+
+        function closePolicyModal() {
+            document.getElementById('policyModal').classList.add('hidden');
+        }
+
+        // --- Application State & Image Editing Logic ---
+        let originalImage = null; // HTML Image Object
+        let imageBase64 = null; // Original raw image base64
+        let finalResultBase64 = null; // Cleaned output image base64
+        let brushCanvas = null; // Interactive canvas
+        let ctx = null;
+        let isDrawing = false;
+        let brushSize = 25;
+        let strokeHistory = []; // Canvas snapshots for undo stroke action
+
+        const uploadView = document.getElementById('uploadView');
+        const editorView = document.getElementById('editorView');
+        const loadingView = document.getElementById('loadingView');
+        const resultView = document.getElementById('resultView');
+
+        const fileInput = document.getElementById('fileInput');
+        const brushSizeSlider = document.getElementById('brushSizeSlider');
+        const brushSizeVal = document.getElementById('brushSizeVal');
+        const undoBtn = document.getElementById('undoBtn');
+        const processBtn = document.getElementById('processBtn');
+
+        // Drag & Drop Setup
+        function setupDragAndDrop() {
+            const dropZone = document.getElementById('dropZone');
+            
+            dropZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('border-primary-500', 'bg-primary-50/10');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('border-primary-500', 'bg-primary-50/10');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-primary-500', 'bg-primary-50/10');
+                if (e.dataTransfer.files.length > 0) {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFile(e.target.files[0]);
+                }
+            });
+        }
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showAlert("Invalid File", currentLang === 'zh' ? "请上传有效的图片格式文件！" : "Please upload a valid image file!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imageBase64 = e.target.result.split(',')[1];
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    initCanvasEditor();
+                }
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Initialize Painting Canvas
+        function initCanvasEditor() {
+            uploadView.classList.add('hidden');
+            resultView.classList.add('hidden');
+            editorView.classList.remove('hidden');
+
+            brushCanvas = document.getElementById('editorCanvas');
+            ctx = brushCanvas.getContext('2d');
+
+            // Set canvas size matching actual device viewport bounds dynamically
+            const maxWidth = Math.min(window.innerWidth - 60, 700);
+            const maxHeight = 450;
+            
+            let w = originalImage.width;
+            let h = originalImage.height;
+
+            // Maintain Aspect Ratio scale fit
+            if (w > maxWidth) {
+                h = h * (maxWidth / w);
+                w = maxWidth;
+            }
+            if (h > maxHeight) {
+                w = w * (maxHeight / h);
+                h = maxHeight;
+            }
+
+            brushCanvas.width = w;
+            brushCanvas.height = h;
+
+            // Draw original image as canvas background
+            ctx.drawImage(originalImage, 0, 0, w, h);
+            
+            // Initialize history
+            strokeHistory = [];
+            saveHistoryState();
+
+            // Set up stroke handlers
+            setupCanvasDrawing();
+        }
+
+        function setupCanvasDrawing() {
+            // Remove previous listeners by cloning nodes if needed (safe-guard)
+            const newSlider = brushSizeSlider.cloneNode(true);
+            brushSizeSlider.parentNode.replaceChild(newSlider, brushSizeSlider);
+            
+            newSlider.addEventListener('input', (e) => {
+                brushSize = e.target.value;
+                brushSizeVal.innerText = brushSize + 'px';
+            });
+
+            // Drawing events (Mouse & Touch compatible)
+            const getCoordinates = (e) => {
+                const rect = brushCanvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            };
+
+            const startDrawing = (e) => {
+                isDrawing = true;
+                const coords = getCoordinates(e);
+                ctx.beginPath();
+                ctx.moveTo(coords.x, coords.y);
+                ctx.lineWidth = brushSize;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                // Bright semi-transparent overlay indicating target area
+                ctx.strokeStyle = 'rgba(239, 68, 68, 0.85)'; 
+                
+                // Draw single point/dot if just clicking/tapping
+                ctx.lineTo(coords.x, coords.y);
+                ctx.stroke();
+            };
+
+            const draw = (e) => {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const coords = getCoordinates(e);
+                ctx.lineTo(coords.x, coords.y);
+                ctx.stroke();
+            };
+
+            const stopDrawing = () => {
+                if (isDrawing) {
+                    isDrawing = false;
+                    ctx.closePath();
+                    saveHistoryState();
+                }
+            };
+
+            // Remove and append Mouse/Touch Events securely
+            brushCanvas.onmousedown = startDrawing;
+            brushCanvas.onmousemove = draw;
+            window.onmouseup = stopDrawing;
+
+            brushCanvas.ontouchstart = startDrawing;
+            brushCanvas.ontouchmove = draw;
+            window.ontouchend = stopDrawing;
+
+            undoBtn.onclick = performUndo;
+            processBtn.onclick = processWithAI;
+        }
+
+        function saveHistoryState() {
+            if (strokeHistory.length > 20) {
+                strokeHistory.shift(); // Bound memory footprint
+            }
+            strokeHistory.push(ctx.getImageData(0, 0, brushCanvas.width, brushCanvas.height));
+        }
+
+        function performUndo() {
+            if (strokeHistory.length > 1) {
+                strokeHistory.pop(); // Remove current state
+                const prevState = strokeHistory[strokeHistory.length - 1];
+                ctx.putImageData(prevState, 0, 0);
+            } else {
+                // Redraw original background image
+                ctx.clearRect(0, 0, brushCanvas.width, brushCanvas.height);
+                ctx.drawImage(originalImage, 0, 0, brushCanvas.width, brushCanvas.height);
+                strokeHistory = [];
+                saveHistoryState();
+            }
+        }
+
+        // --- Gemini 2.5 Flash Image Inpainting Model API Call ---
+        async function processWithAI() {
+            // Show loading view
+            editorView.classList.add('hidden');
+            loadingView.classList.remove('hidden');
+
+            // Gather inputs
+            const userPromptVal = document.getElementById('promptInput').value.trim();
+            
+            // Build visual instructions for Gemini. We instruct it to inspect the scribbled areas or text
+            const finalAIPrompt = `
+                TASK: You are a professional image editing and inpainting AI model. 
+                I have provided two images:
+                1. The clean original image.
+                2. The marked image where the watermark/object area has been painted over in red scribbles.
+
+                INSTRUCTIONS: Remove any watermarks, text overlays, logos, or unwanted objects specified by the red-scribbled areas from the first image. 
+                Keep the absolute same output dimension/ratio as the original. Reconstruct background details seamlessly.
+                EXTRA SPECIFICS: ${userPromptVal || "Detect and erase any text labels, transparent watermarks, copyright signs, or user highlighted watermark objects."}
+                Return ONLY the clean edited output image without any text explanation.
+            `.trim();
+
+            // Extract original resized base64 data to align perfectly with the mask canvas
+            const cleanCanvas = document.createElement('canvas');
+            cleanCanvas.width = brushCanvas.width;
+            cleanCanvas.height = brushCanvas.height;
+            const cleanCtx = cleanCanvas.getContext('2d');
+            cleanCtx.drawImage(originalImage, 0, 0, cleanCanvas.width, cleanCanvas.height);
+            
+            const cleanResizedBase64 = cleanCanvas.toDataURL('image/png').split(',')[1];
+            const maskResizedBase64 = brushCanvas.toDataURL('image/png').split(',')[1];
+
+            // Prepare base64 original data + mask data to send
+            const payload = {
+                contents: [{
+                    parts: [
+                        { text: finalAIPrompt },
+                        { inlineData: { mimeType: "image/png", data: cleanResizedBase64 } },
+                        { inlineData: { mimeType: "image/png", data: maskResizedBase64 } }
+                    ]
+                }],
+                generationConfig: {
+                    responseModalities: ["IMAGE"]
+                }
+            };
+
+            try {
+                // Run post requests with exponential backoff up to 5 times (1s, 2s, 4s, 8s, 16s)
+                const result = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await result.json();
+                
+                // Handle image extraction based on Gemini standard structure
+                const returnedBase64 = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
+
+                if (!returnedBase64) {
+                    throw new Error("Could not extract result image from the response.");
+                }
+
+                finalResultBase64 = returnedBase64;
+                showResults();
+
+            } catch (err) {
+                loadingView.classList.add('hidden');
+                editorView.classList.remove('hidden');
+                showAlert("AI processing failed", currentLang === 'zh' ? "AI 擦除失败，请重试或尝试简化涂抹范围。" : "AI failed to erase. Please retry or adjust your paint/brush selection.");
+            }
+        }
+
+        // Helper fetch handler ensuring exponential backoff logic is applied flawlessly
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            let delay = 1000;
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return response;
+                } catch (e) {
+                    // Retrying silently
+                }
+                if (i < maxRetries - 1) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2; 
+                }
+            }
+            throw new Error("API Connection timeout after max retries.");
+        }
+
+        // Display results to the user
+        function showResults() {
+            loadingView.classList.add('hidden');
+            resultView.classList.remove('hidden');
+
+            const origSrc = `data:image/png;base64,${imageBase64}`;
+            const cleanSrc = `data:image/png;base64,${finalResultBase64}`;
+
+            document.getElementById('originalPreview').src = origSrc;
+            document.getElementById('cleanedResult').src = cleanSrc;
+        }
+
+        function downloadCleanedImage() {
+            if (!finalResultBase64) return;
+            const link = document.createElement('a');
+            link.download = 'eraser-ai-cleaned.png';
+            link.href = `data:image/png;base64,${finalResultBase64}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function backToEdit() {
+            resultView.classList.add('hidden');
+            editorView.classList.remove('hidden');
+        }
+
+        function resetEditor() {
+            strokeHistory = [];
+            originalImage = null;
+            imageBase64 = null;
+            finalResultBase64 = null;
+            document.getElementById('promptInput').value = "";
+            fileInput.value = "";
+            
+            resultView.classList.add('hidden');
+            editorView.classList.add('hidden');
+            loadingView.classList.add('hidden');
+            uploadView.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

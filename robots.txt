@@ -1,0 +1,5 @@
+# https://eraser.squoosh.online/robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://eraser.squoosh.online/sitemap.xml
