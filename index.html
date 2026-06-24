@@ -1286,7 +1286,7 @@
 
             try {
                 // Run post requests with exponential backoff up to 5 times (1s, 2s, 4s, 8s, 16s)
-                const result = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=${AIzaSyBdvMtH0Cl3PnJhNXyEEfUaaZYaTRF7nTI}`, {
+                const result = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image-preview:generateContent?key=AQ.Ab8RN6Ju_8KL10-MBcDnSuB6nTAaxKf7yE7ply6BPIZ9yK9Ejw`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
