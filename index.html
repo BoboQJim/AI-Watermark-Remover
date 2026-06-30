@@ -44,7 +44,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght=0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- JSON-LD Structured Data for SEO -->
+    <!-- JSON-LD 结构化数据，利于 SEO 抓取 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -86,10 +86,10 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
 
-    <!-- Global Header -->
+    <!-- 全局导航栏 -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Logo -->
+            <!-- 标志 Logo -->
             <a href="#" class="flex items-center space-x-2">
                 <div class="bg-primary-600 text-white p-2 rounded-xl shadow-md shadow-primary-500/20">
                     <i data-lucide="sparkles" class="w-5 h-5"></i>
@@ -99,16 +99,16 @@
                 </span>
             </a>
 
-            <!-- Navigation & Actions -->
+            <!-- 语言和主题切换区 -->
             <div class="flex items-center space-x-4">
-                <!-- Language Selector -->
+                <!-- 语言选择下拉菜单 -->
                 <div class="relative inline-block text-left" id="langDropdown">
                     <button id="langBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm font-medium">
                         <i data-lucide="languages" class="w-4 h-4"></i>
                         <span id="currentLangLabel">English</span>
                         <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
                     </button>
-                    <!-- Dropdown Panel -->
+                    <!-- 下拉内容 -->
                     <div id="langMenu" class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 py-1 text-sm z-50">
                         <button onclick="changeLanguage('en')" class="flex items-center justify-between w-full px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-left">
                             <span>English</span><span class="text-xs text-slate-400">Global</span>
@@ -131,7 +131,7 @@
                     </div>
                 </div>
 
-                <!-- Theme Toggle -->
+                <!-- 深浅主题切换 -->
                 <button id="themeToggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                     <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
                     <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
@@ -140,9 +140,9 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- 主体区域 -->
     <main class="flex-grow">
-        <!-- Hero & Title Section -->
+        <!-- 宣传和标题栏 -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6 text-center">
             <div class="inline-flex items-center space-x-2 bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold mb-6">
                 <span class="flex h-2 w-2 relative">
@@ -160,14 +160,14 @@
             </p>
         </section>
 
-        <!-- Main Workspace (Interactive App Section) -->
+        <!-- 交互式工作区 -->
         <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-150 dark:border-slate-700/50 overflow-hidden">
                 
-                <!-- Hidden file input to prevent event bubbling conflicts -->
+                <!-- 隐藏的文件上传框 -->
                 <input type="file" id="fileInput" accept="image/*" class="hidden">
 
-                <!-- Upload State -->
+                <!-- 初始上传状态区 -->
                 <div id="uploadView" class="p-8 sm:p-16 flex flex-col items-center justify-center text-center">
                     <div id="dropZone" class="w-full max-w-3xl border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-2xl p-8 sm:p-12 transition cursor-pointer flex flex-col items-center justify-center bg-slate-50/50 dark:bg-slate-900/20">
                         <div class="bg-primary-100 dark:bg-primary-950/50 p-4 rounded-full text-primary-600 dark:text-primary-400 mb-4">
@@ -182,17 +182,16 @@
                     </div>
                 </div>
 
-                <!-- Editor State -->
+                <!-- 画布编辑状态区 -->
                 <div id="editorView" class="hidden flex flex-col lg:flex-row h-auto lg:h-[650px]">
-                    <!-- Interactive Canvas Area -->
+                    <!-- 交互式 Canvas 画布区 -->
                     <div class="flex-grow bg-slate-100 dark:bg-slate-950 p-4 sm:p-6 flex flex-col items-center justify-center relative min-h-[350px] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800">
-                        <!-- Canvas Container -->
                         <div id="canvasWrapper" class="canvas-container bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 max-w-full max-h-full">
                             <canvas id="editorCanvas"></canvas>
                         </div>
                     </div>
 
-                    <!-- Sidebar Toolbar / Control Panel -->
+                    <!-- 侧边工具栏/参数面板 -->
                     <div class="w-full lg:w-96 p-6 flex flex-col justify-between bg-white dark:bg-slate-800">
                         <div>
                             <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-700">
@@ -206,7 +205,7 @@
                                 </button>
                             </div>
 
-                            <!-- Brush Size Control -->
+                            <!-- 笔刷尺寸调整 -->
                             <div class="mb-6">
                                 <div class="flex items-center justify-between mb-2">
                                     <label class="text-sm font-semibold flex items-center space-x-1.5">
@@ -219,7 +218,7 @@
                                 <p class="text-xs text-slate-400 mt-1.5" data-i18n="brushHint">Scribble directly on the watermark, text or logo to erase it.</p>
                             </div>
 
-                            <!-- Text/Refinement Prompt Area -->
+                            <!-- 引导提示词（可选） -->
                             <div class="mb-6">
                                 <label class="block text-sm font-semibold mb-2 flex items-center space-x-1.5">
                                     <i data-lucide="keyboard" class="w-4 h-4 text-slate-400"></i>
@@ -228,7 +227,7 @@
                                 <textarea id="promptInput" rows="3" class="w-full text-sm p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition placeholder-slate-400" placeholder="e.g., watermark in the bottom right corner, text logo, stamp..."></textarea>
                             </div>
 
-                            <!-- Action Buttons -->
+                            <!-- 行为触发布局 -->
                             <div class="space-y-3">
                                 <button id="processBtn" class="w-full bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-primary-500/25 transition flex items-center justify-center space-x-2">
                                     <i data-lucide="sparkles" class="w-5 h-5"></i>
@@ -242,7 +241,7 @@
                             </div>
                         </div>
 
-                        <!-- Footer Info in Sidebar -->
+                        <!-- 侧边栏页脚参数 -->
                         <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 text-xs text-slate-400 flex items-center justify-between">
                             <span class="flex items-center space-x-1">
                                 <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i>
@@ -253,27 +252,27 @@
                     </div>
                 </div>
 
-                <!-- Processing Loading View -->
+                <!-- 正在处理动画区 -->
                 <div id="loadingView" class="hidden p-12 sm:p-24 flex flex-col items-center justify-center text-center">
                     <div class="relative mb-6">
                         <div class="w-16 h-16 border-4 border-primary-100 border-t-primary-600 rounded-full animate-spin"></div>
                         <i data-lucide="sparkles" class="w-6 h-6 text-primary-500 absolute top-5 left-5 animate-pulse"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2 animate-pulse" data-i18n="processingTitle">AI Erasing in Progress...</h3>
-                    <p class="text-slate-400 text-sm max-w-md" data-i18n="processingSubtitle">Analyzing context, filling pixels, and restoring original details dynamically. This may take up to 20 seconds.</p>
+                    <p id="processingSubtitle" class="text-slate-400 text-sm max-w-md animate-pulse" data-i18n="processingSubtitle">Analyzing context, filling pixels, and restoring original details dynamically. This may take up to 20 seconds.</p>
                 </div>
 
-                <!-- Result & Preview Section -->
+                <!-- 处理完成后的对照效果与下载区 -->
                 <div id="resultView" class="hidden p-6 sm:p-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <!-- Before Visual -->
+                        <!-- 处理前 -->
                         <div class="space-y-2">
                             <span class="text-xs font-semibold uppercase tracking-wider bg-slate-100 dark:bg-slate-700 px-2.5 py-1 rounded-md" data-i18n="previewOriginal">Original Image</span>
                             <div class="aspect-auto max-h-[400px] overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center bg-slate-50 dark:bg-slate-900">
                                 <img id="originalPreview" src="" alt="Original Watermarked Image" class="max-w-full max-h-[400px] object-contain">
                             </div>
                         </div>
-                        <!-- After AI Removal Result -->
+                        <!-- 处理后 -->
                         <div class="space-y-2">
                             <span class="text-xs font-semibold uppercase tracking-wider bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 px-2.5 py-1 rounded-md" data-i18n="previewResult">Cleaned Image</span>
                             <div class="aspect-auto max-h-[400px] overflow-hidden rounded-xl border border-primary-200 dark:border-primary-900 flex items-center justify-center bg-slate-50 dark:bg-slate-900 relative">
@@ -282,7 +281,7 @@
                         </div>
                     </div>
 
-                    <!-- Download & Actions Container -->
+                    <!-- 操作控制集 -->
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 border-t border-slate-100 dark:border-slate-700 pt-6">
                         <button onclick="downloadCleanedImage()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center space-x-2">
                             <i data-lucide="download" class="w-5 h-5"></i>
@@ -301,7 +300,7 @@
             </div>
         </section>
 
-        <!-- Custom Warning / Error Modal Alerts -->
+        <!-- 自定义提示框 (由 JS showAlert 填充和调用) -->
         <div id="customAlert" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
             <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-700">
                 <div class="flex items-center space-x-3 text-red-500 mb-4">
@@ -317,20 +316,16 @@
             </div>
         </div>
 
-        <!-- Policy & Information Modal Container -->
+        <!-- 协议和政策模态窗 -->
         <div id="policyModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
             <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 dark:border-slate-700 flex flex-col max-h-[85vh]">
                 <div class="flex items-center justify-between pb-4 border-b border-slate-150 dark:border-slate-700">
-                    <h3 class="font-bold text-xl flex items-center space-x-2" id="policyModalTitle">
-                        <!-- Dynamic Title Header inside JavaScript -->
-                    </h3>
+                    <h3 class="font-bold text-xl flex items-center space-x-2" id="policyModalTitle"></h3>
                     <button onclick="closePolicyModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
                         <i data-lucide="x" class="w-6 h-6"></i>
                     </button>
                 </div>
-                <div class="flex-grow overflow-y-auto py-6 text-sm text-slate-600 dark:text-slate-300 space-y-4" id="policyModalBody">
-                    <!-- Dynamic Body content rendered in switch format depending on active language -->
-                </div>
+                <div class="flex-grow overflow-y-auto py-6 text-sm text-slate-600 dark:text-slate-300 space-y-4" id="policyModalBody"></div>
                 <div class="flex justify-end pt-4 border-t border-slate-150 dark:border-slate-700">
                     <button onclick="closePolicyModal()" class="bg-primary-600 hover:bg-primary-700 text-white font-medium px-5 py-2 rounded-xl transition text-sm">
                         Close
@@ -339,12 +334,12 @@
             </div>
         </div>
 
-        <!-- Feature Grid -->
+        <!-- 宣传与特征优势 -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200/50 dark:border-slate-800/50">
             <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12" data-i18n="featuresH2">Why Choose EraserAI For Your Images?</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
+                <!-- 特征 1 -->
                 <div class="bg-white dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition">
                     <div class="bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                         <i data-lucide="zap" class="w-6 h-6"></i>
@@ -352,7 +347,7 @@
                     <h3 class="font-bold text-lg mb-2" data-i18n="feat1Title">Instant AI Processing</h3>
                     <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="feat1Desc">No tedious layers. Our advanced neural-net detects, isolates, and clears the context seamlessly in milliseconds.</p>
                 </div>
-                <!-- Feature 2 -->
+                <!-- 特征 2 -->
                 <div class="bg-white dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition">
                     <div class="bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                         <i data-lucide="eye" class="w-6 h-6"></i>
@@ -360,7 +355,7 @@
                     <h3 class="font-bold text-lg mb-2" data-i18n="feat2Title">Lossless Quality Output</h3>
                     <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="feat2Desc">Your original image resolution remains untouched. Get sharp, export-ready HD photos completely clean.</p>
                 </div>
-                <!-- Feature 3 -->
+                <!-- 特征 3 -->
                 <div class="bg-white dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-lg transition">
                     <div class="bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                         <i data-lucide="lock" class="w-6 h-6"></i>
@@ -371,10 +366,10 @@
             </div>
         </section>
 
-        <!-- Dynamic SEO Content Structure (How it Works & FAQ) -->
+        <!-- 步骤和常见问答 -->
         <section class="bg-slate-100/50 dark:bg-slate-950/30 py-16 border-t border-slate-200/50 dark:border-slate-800/50">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- How to Use -->
+                <!-- 如何使用 -->
                 <div class="mb-16">
                     <h2 class="text-2xl sm:text-3xl font-bold text-center mb-10" data-i18n="howItWorksH2">How To Remove Watermark From Image Online</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -396,7 +391,7 @@
                     </div>
                 </div>
 
-                <!-- FAQ Snippet for search engines -->
+                <!-- 常见问答 -->
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8" data-i18n="faqTitle">Frequently Asked Questions</h2>
                     <div class="space-y-4">
@@ -418,7 +413,7 @@
         </section>
     </main>
 
-    <!-- Global Footer -->
+    <!-- 页脚与法律协议链接 -->
     <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -433,12 +428,18 @@
         </div>
     </footer>
 
-    <!-- App Logic Script -->
+    <!-- 应用逻辑核心 -->
     <script>
-        // API Configuration
+        // API 秘钥配置
+        // 如果您在受限地区部署，推荐使用中转代理 (Reverse Proxy) 解决 403 问题。
         const apiKey = "AIzaSyBdvMtH0Cl3PnJhNXyEEfUaaZYaTRF7nTI";
+        
+        // 智绘大模型选用。注意：免费层级多模态图像生成/编辑需使用 "gemini-2.5-flash-image"。
+        // 历史版本中由于 Gemini 关闭了 preview 的 gemini-2.5-flash-preview-image / gemini-2.5-flash-image-preview
+        // 而直接调用 gemini-2.5-flash 会因其为文本模型而导致 404/400 失败。这里固化为最新的正式版。
+        const apiModel = "gemini-2.5-flash-image";
 
-        // Translation Dictionary matching geo-targeted regions
+        // 多语言本地化字典
         const i18n = {
             en: {
                 badge: "100% Free & Unlimited AI Object Removal",
@@ -486,7 +487,8 @@
                 a3: "We support common digital graphic formats including JPG, JPEG, PNG, and WebP images.",
                 privacy: "Privacy Policy",
                 terms: "Terms of Service",
-                contact: "Contact"
+                contact: "Contact",
+                quotaWarning: "Google Gemini Free API quota limit reached. Auto-retrying in {sec}s..."
             },
             es: {
                 badge: "Eliminador de Objetos por IA 100% Gratis e Ilimitado",
@@ -526,15 +528,15 @@
                 step3Title: "Limpiar y Exportar",
                 step3Desc: "Presione procesar y deje que la IA redibuje y entregue instantáneamente su imagen HD.",
                 faqTitle: "Preguntas Frecuentes",
-                q1: "¿Es este removedor de marcas de agua por IA totalmente gratis?",
+                q1: "¿Es este remover de marcas de agua por IA totalmente gratis?",
                 a1: "¡Sí! Nuestro servicio es 100% gratuito sin registro, sin límites de tokens y sin límites de prueba.",
                 q2: "¿Eliminar la marca de agua afecta la resolución de la foto?",
                 a2: "No, nuestra IA edita y elimina los píxeles de la marca de agua localmente, conservando la altura, el ancho y la claridad visual exactos.",
-                q3: "¿Qué tipos de archivos son compatibles?",
-                a3: "Soportamos formatos gráficos digitales comunes, incluidos JPG, JPEG, PNG y WebP.",
+                q3: "Soportamos formatos gráficos digitales comunes, incluidos JPG, JPEG, PNG y WebP.",
                 privacy: "Política de Privacidad",
                 terms: "Términos de Servicio",
-                contact: "Contacto"
+                contact: "Contacto",
+                quotaWarning: "Cuota de API de Google excedida. Reintentando en {sec}s..."
             },
             fr: {
                 badge: "Suppression d'Objets IA 100% Gratuite & Illimitée",
@@ -576,18 +578,19 @@
                 faqTitle: "Foire Aux Questions",
                 q1: "Cet effaceur de filigrane IA est-il vraiment gratuit ?",
                 a1: "Oui ! Notre service est 100% gratuit, sans inscription, sans limite de jetons et sans essai payant.",
-                q2: "La suppression du filigrane affecte-t-elle la résolution ?",
-                a2: "Non, notre IA modifie les pixels localement et conserve exactement les dimensions et la clarté de votre photo.",
+                q2: "La suppression du filigrane affect-t-elle la résolution ?",
+                a2: "No, notre IA modifie les pixels localement et conserve exactement les dimensions et la clarté de votre photo.",
                 q3: "Quels formats d'image sont acceptés ?",
                 a3: "Nous prenons en charge les formats graphiques courants : JPG, JPEG, PNG et WebP.",
                 privacy: "Politique de Confidentialité",
                 terms: "Conditions d'Utilisation",
-                contact: "Contact"
+                contact: "Contact",
+                quotaWarning: "Quota d'API Google dépassé. Réessai dans {sec}s..."
             },
             zh: {
                 badge: "100% 免费且无限制的 AI 图像去水印工具",
                 title: "免费 AI 在线图片去水印",
-                subtitle: "使用先进的 AI 图像到图像技术，精准擦除图片中的水印文字、徽标、图章、路人或任何多余物体。",
+                subtitle: "使用先进 of AI 图像到图像技术，精准擦除图片中的水印文字、徽标、图章、路人或任何多余物体。",
                 dragTitle: "拖放您的图片到这里",
                 dragSubtitle: "支持 PNG, JPG, JPEG, WEBP 格式",
                 browseBtn: "浏览本地文件",
@@ -630,7 +633,8 @@
                 a3: "我们支持主流的数字图形格式，包括 JPG、JPEG、PNG 以及 WebP 格式。",
                 privacy: "隐私政策",
                 terms: "服务条款",
-                contact: "联系我们"
+                contact: "联系我们",
+                quotaWarning: "Google 免费接口配额耗尽。正在为您等待冷却，将在 {sec} 秒后自动重试..."
             },
             vi: {
                 badge: "Xóa Vật Thể Bằng AI 100% Miễn Phí & Không Giới Hạn",
@@ -678,7 +682,8 @@
                 a3: "Chúng tôi hỗ trợ các định dạng đồ họa phổ biến nhất bao gồm JPG, JPEG, PNG và WebP.",
                 privacy: "Chính Sách Riêng Tư",
                 terms: "Điều Khoản Dịch Vụ",
-                contact: "Liên Hệ"
+                contact: "Liên Hệ",
+                quotaWarning: "Đã vượt quá giới hạn API Google. Thử lại sau {sec} giây..."
             },
             sw: {
                 badge: "Ondoa Vitu Kwenye Picha Bure na Bila Kikomo kwa AI",
@@ -707,7 +712,7 @@
                 feat1Title: "Usindikaji wa Papo Hapo",
                 feat1Desc: "Hakuna tabaka ngumu. Mtandao wetu wa hali ya juu hugundua na kuondoa alama kwa urahisi zaidi.",
                 feat2Title: "Ubora Bila Kupotea",
-                feat2Desc: "Azimio asili la picha yako linabaki salama. Pata picha safi kabisa katika ubora wa HD.",
+                feat2Desc: "Azimio asili la picha yako linabaki salama. Pata picha safi kabisa katika ubora vya HD.",
                 feat3Title: "Faragha na Usalama 100%",
                 feat3Desc: "Picha zinasindikwa moja kwa moja. Hatuhifadhi picha zako asili wala zilizosindikwa.",
                 howItWorksH2: "Jinsi ya Kuondoa Alama ya Maji Mkondoni",
@@ -720,13 +725,14 @@
                 faqTitle: "Maswali Yanayoulizwa Mara kwa Mara",
                 q1: "Je, kifaa hiki cha AI ni bure kabisa?",
                 a1: "Ndiyo! Huduma yetu ni bure 100% bila usajili, hakuna kikomo cha tokeni na hakuna majaribio ya kulipia.",
-                q2: "Je, kuondoa alama ya maji kunaathiri ubora wa picha?",
+                q2: "Je, kuondoa alama ya maji kunaathiri ubora vya picha?",
                 a2: "Hapana, AI yetu inahariri saizi za picha za asili ndani ya eneo lililopakwa rangi pekee, ikihifadhi upana na urefu ule ule.",
                 q3: "Ni aina gani za faili zinazoungwa mkono?",
                 a3: "Tunasaidia faili maarufu za picha ikiwa ni pamoja na JPG, JPEG, PNG, na WebP.",
                 privacy: "Sera ya Faragha",
                 terms: "Sheria na Masharti",
-                contact: "Wasiliana Nasi"
+                contact: "Wasiliana Nasi",
+                quotaWarning: "Ukomo wa API ya Google umefikiwa. Kujaribu tena baada ya sekunde {sec}..."
             }
         };
 
@@ -826,7 +832,7 @@
                 privacyTitle: "隐私政策",
                 privacyBody: `
                     <p class="font-semibold text-slate-800 dark:text-white">您的隐私安全对我们至关重要。</p>
-                    <p>在 EraserAI，我们实行严格的<strong>无日志政策</strong>。所有的图片在通过加密隧道上传后将直接流式传输给先进的AI处理器，并由实时反馈，我们绝不在服务器端存储、缓存、共享或销售您的原始及结果图片。</p>
+                    <p>在 EraserAI，我们实行严格的<strong>无日志政策</strong>。所有的图片在通过加密隧道上传后将直接流式传输给先进的AI处理器，并有实时反馈，我们绝不在服务器端存储、缓存、共享或销售您的原始及结果图片。</p>
                     <p>使用本工具无需创建账号、绑定邮箱或使用 Cookies 进行个人偏好追踪，确保您的每一次处理都100%匿名且安全。</p>
                     <p>我们严格符合 GDPR 及国际隐私保护标准，您的图像所有权及控制权始终属于您自己。</p>
                 `,
@@ -886,7 +892,7 @@
                 privacyTitle: "Sera ya Faragha",
                 privacyBody: `
                     <p class="font-semibold text-slate-800 dark:text-white">Faragha yako ni kipaumbele chetu kikuu.</p>
-                    <p>Katika EraserAI, tunafanya kazi kwa kufuata <strong>Sera ya Kutohifadhi Kumbukumbu</strong>. Usindikaji wa picha zote hufanyika moja kwa moja kupitia njia salama na zilizosimbwa hadi kwenye mtandao wetu wa AI. Hatuhifadhi picha zako asili wala zilizosindikwa.</p>
+                    <p>Katika EraserAI, tunfanya kazi kwa kufuata <strong>Sera ya Kutohifadhi Kumbukumbu</strong>. Usindikaji wa picha zote hufanyika moja kwa moja kupitia njia salama na zilizosimbwa hadi kwenye mtandao wetu vya AI. Hatuhifadhi picha zako asili wala zilizosindikwa.</p>
                     <p>Hakuna haja ya kujisajili wala kufuatiliwa kwa kuki ili kutumia kifaa hiki, na kukufanya uwe salama kabisa na usiyejulikana.</p>
                     <p>Kulingana na viwango vya kimataifa vya GDPR na CCPA, unabaki kuwa mmiliki kamili wa data yako ya picha.</p>
                 `,
@@ -897,13 +903,13 @@
                     <ul class="list-disc pl-5 space-y-2">
                         <li>Lazima uwe mmiliki halali au uwe na ruhusa ya kuhariri faili kabla ya kufuta alama ya maji au nembo yoyote.</li>
                         <li>Kifaa hiki kimetengenezwa kwa matumizi ya kisheria na ya haki pekee, kama kusafisha picha binafsi na kurudisha ubora.</li>
-                        <li>EraserAI haitawajibika kisheria kwa uhariri wowote usioidhinishwa uliofanywa na watumiaji wetu.</li>
+                        <li>EraserAI haitawajibika kisheria kwa uhaririu mwepesi usiohalali uliofanywa na watumiaji wetu.</li>
                     </ul>
                 `,
                 contactTitle: "Wasiliana Nasi",
                 contactBody: `
                     <div class="space-y-4">
-                        <p>Je, unahitaji msaada, ushirikiano wa kibiashara, au una swali kuhusu huduma yetu?</p>
+                        <p>Je, unahikitaji msaada, ushirikiano vya kibiashara, au una swali kuhusu huduma yetu?</p>
                         <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800">
                             <span class="block text-xs text-slate-400 font-semibold uppercase tracking-wider">Barua Pepe Rasmi</span>
                             <a href="mailto:support@squoosh.online" class="text-primary-600 hover:underline font-bold text-lg">support@squoosh.online</a>
@@ -987,30 +993,44 @@
 
             // Handle placeholders
             const promptInput = document.getElementById('promptInput');
-            if (currentLang === 'zh') {
-                promptInput.placeholder = "例如：右下角的水印、文字徽标、多余的印章...";
-            } else if (currentLang === 'es') {
-                promptInput.placeholder = "ej., marca de agua en la esquina inferior derecha, logotipo, sello...";
-            } else if (currentLang === 'fr') {
-                promptInput.placeholder = "ex: filigrane dans le coin inférieur droit, logo texte, tampon...";
-            } else if (currentLang === 'vi') {
-                promptInput.placeholder = "Ví dụ: hình mờ ở góc dưới cùng bên phải, văn bản logo, nhãn dán...";
-            } else if (currentLang === 'sw') {
-                promptInput.placeholder = "Mfano: alama ya maji kwenye kona ya chini kulia, nembo ya maandishi, muhuri...";
-            } else {
-                promptInput.placeholder = "e.g., watermark in the bottom right corner, text logo, stamp...";
+            if (promptInput) {
+                if (currentLang === 'zh') {
+                    promptInput.placeholder = "例如：右下角的水印、文字徽标、多余的印章...";
+                } else if (currentLang === 'es') {
+                    promptInput.placeholder = "ej., marca de agua en la esquina inferior derecha, logotipo, sello...";
+                } else if (currentLang === 'fr') {
+                    promptInput.placeholder = "ex: filigrane dans le coin inférieur droit, logo texte, tampon...";
+                } else if (currentLang === 'vi') {
+                    promptInput.placeholder = "Ví dụ: hình mờ ở góc dưới cùng bên phải, văn bản logo, nhãn dán...";
+                } else if (currentLang === 'sw') {
+                    promptInput.placeholder = "Mfano: alama ya maji kwenye kona ya chini kulia, nembo ya maandishi, muhuri...";
+                } else {
+                    promptInput.placeholder = "e.g., watermark in the bottom right corner, text logo, stamp...";
+                }
             }
         }
 
         // Custom Modal Alert instead of native alert()
         function showAlert(title, message) {
-            document.getElementById('alertTitle').innerText = title;
-            document.getElementById('alertMsg').innerText = message;
-            document.getElementById('customAlert').classList.remove('hidden');
+            const alertTitleEl = document.getElementById('alertTitle');
+            const alertMsgEl = document.getElementById('alertMsg');
+            const customAlertEl = document.getElementById('customAlert');
+
+            if (alertTitleEl && alertMsgEl && customAlertEl) {
+                alertTitleEl.innerText = title;
+                alertMsgEl.innerText = message;
+                customAlertEl.classList.remove('hidden');
+            } else {
+                // 回退原生浏览器通知，以防 DOM 缺失造成系统断流
+                console.warn("Alert elements missing in DOM, falling back to console:", title, message);
+            }
         }
 
         function closeAlert() {
-            document.getElementById('customAlert').classList.add('hidden');
+            const customAlertEl = document.getElementById('customAlert');
+            if (customAlertEl) {
+                customAlertEl.classList.add('hidden');
+            }
         }
 
         // Policy Dynamic Modal Handlers
@@ -1240,12 +1260,21 @@
 
         // --- Gemini 2.5 Flash Image Inpainting Model API Call ---
         async function processWithAI() {
+            if (!apiKey || apiKey.includes("YOUR_API_KEY")) {
+                showAlert("Missing API Key", currentLang === 'zh' ? "请先在代码中配置您的 Gemini API Key！" : "Please insert your Google Gemini API Key in the source code!");
+                return;
+            }
+
             // Show loading view
             editorView.classList.add('hidden');
             loadingView.classList.remove('hidden');
 
-            // Gather inputs
-            const userPromptVal = document.getElementById('promptInput').value.trim();
+            // Safely gather inputs to prevent TypeError crashes on elements that may not exist in the DOM
+            const promptInputEl = document.getElementById('promptInput');
+            const userPromptVal = promptInputEl ? promptInputEl.value.trim() : "";
+            
+            const apiProxyInputEl = document.getElementById('apiProxyInput');
+            const proxyEndpoint = apiProxyInputEl ? apiProxyInputEl.value.trim() : "";
             
             // Build visual instructions for Gemini. We instruct it to inspect the scribbled areas or text
             const finalAIPrompt = `
@@ -1284,53 +1313,142 @@
                 }
             };
 
+            // Build API endpoint (allowing dynamic routing via custom user gateway/proxy if element is present)
+            const baseUri = proxyEndpoint ? proxyEndpoint.replace(/\/$/, "") : "https://generativelanguage.googleapis.com";
+            const apiTargetUrl = `${baseUri}/v1beta/models/${apiModel}:generateContent?key=${apiKey}`;
+
             try {
                 // Run post requests with exponential backoff up to 5 times (1s, 2s, 4s, 8s, 16s)
-                const result = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                const result = await fetchWithRetry(apiTargetUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
                 const data = await result.json();
-                
+
                 // Handle image extraction based on Gemini standard structure
                 const returnedBase64 = data.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
 
                 if (!returnedBase64) {
-                    throw new Error("Could not extract result image from the response.");
+                    // Surface the model's text reply so the user can see what went wrong
+                    const textPart = data.candidates?.[0]?.content?.parts?.find(p => p.text)?.text;
+                    const blockReason = data.promptFeedback?.blockReason;
+                    const finishReason = data.candidates?.[0]?.finishReason;
+                    console.error("Gemini response without image:", data);
+                    throw new Error(
+                        "No image returned. " +
+                        (blockReason ? `Blocked: ${blockReason}. ` : "") +
+                        (finishReason ? `Finish: ${finishReason}. ` : "") +
+                        (textPart ? `Model said: ${textPart}` : "")
+                    );
                 }
 
                 finalResultBase64 = returnedBase64;
                 showResults();
 
             } catch (err) {
+                console.error("AI processing failed:", err);
                 loadingView.classList.add('hidden');
                 editorView.classList.remove('hidden');
-                showAlert("AI processing failed", currentLang === 'zh' ? "AI 擦除失败，请重试或尝试简化涂抹范围。" : "AI failed to erase. Please retry or adjust your paint/brush selection.");
+                const detail = err && err.message ? `\n\n[${err.message}]` : "";
+                showAlert(
+                    "AI processing failed",
+                    (currentLang === 'zh'
+                        ? "AI 擦除失败，请重试或尝试简化涂抹范围。"
+                        : "AI failed to erase. Please retry or adjust your paint/brush selection.")
+                    + detail
+                );
             }
         }
 
         // Helper fetch handler ensuring exponential backoff logic is applied flawlessly
         async function fetchWithRetry(url, options, maxRetries = 5) {
             let delay = 1000;
+            let lastErrText = "";
             for (let i = 0; i < maxRetries; i++) {
                 try {
                     const response = await fetch(url, options);
                     if (response.ok) return response;
+                    
+                    // Capture the real server message instead of silently retrying
+                    lastErrText = await response.text();
+                    let parsedErrText = `HTTP ${response.status}: ${lastErrText}`;
+                    
+                    // Handle 429 Rate Limit/Quota specifically
+                    if (response.status === 429) {
+                        let waitSeconds = 5; // Default safety cooldown
+                        try {
+                            const errObj = JSON.parse(lastErrText);
+                            const details = errObj?.error?.details || [];
+                            for (const detail of details) {
+                                if (detail.retryDelay) {
+                                    const parsedSec = parseFloat(detail.retryDelay);
+                                    if (!isNaN(parsedSec)) {
+                                        waitSeconds = parsedSec;
+                                        break;
+                                    }
+                                }
+                            }
+                        } catch (e) {}
+                        
+                        // Dynamically update the loader subtitle with a real-time ticking delay countdown
+                        updateLoaderWithCountdown(waitSeconds);
+                        
+                        // Wait precisely the duration required by Google's response before retrying
+                        await new Promise(resolve => setTimeout(resolve, waitSeconds * 1000));
+                        continue;
+                    }
+
+                    // 4xx errors won't get better by retrying (bad key, referrer block, bad request)
+                    if (response.status >= 400 && response.status < 500) {
+                        throw new Error(parsedErrText);
+                    }
                 } catch (e) {
-                    // Retrying silently
+                    // Check if it's our thrown HTTP 4xx error to bubble up immediately
+                    if (e.message && e.message.startsWith("HTTP")) {
+                        throw e;
+                    }
+                    lastErrText = e.message || String(e);
                 }
                 if (i < maxRetries - 1) {
                     await new Promise(resolve => setTimeout(resolve, delay));
-                    delay *= 2; 
+                    delay *= 2;
                 }
             }
-            throw new Error("API Connection timeout after max retries.");
+            throw new Error(lastErrText || "API Connection timeout after max retries.");
+        }
+
+        // Countdown timer utility to elegantly alert users during Google API quota cooling down
+        let activeCountdownInterval = null;
+        function updateLoaderWithCountdown(totalSeconds) {
+            const subtitleEl = document.getElementById('processingSubtitle');
+            if (!subtitleEl) return;
+
+            if (activeCountdownInterval) clearInterval(activeCountdownInterval);
+
+            let timeLeft = Math.ceil(totalSeconds);
+            const dict = i18n[currentLang] || i18n['en'];
+            const template = dict.quotaWarning || "API rate limit reached. Retrying automatically in {sec}s...";
+
+            subtitleEl.innerText = template.replace("{sec}", timeLeft);
+
+            activeCountdownInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    clearInterval(activeCountdownInterval);
+                    subtitleEl.innerText = currentLang === 'zh'
+                        ? "正在动态分析上下文、重绘填补像素并完美还原原始图像。这可能需要多达 20 秒。"
+                        : "Analyzing context, filling pixels, and restoring original details dynamically. This may take up to 20 seconds.";
+                } else {
+                    subtitleEl.innerText = template.replace("{sec}", timeLeft);
+                }
+            }, 1000);
         }
 
         // Display results to the user
         function showResults() {
+            if (activeCountdownInterval) clearInterval(activeCountdownInterval);
             loadingView.classList.add('hidden');
             resultView.classList.remove('hidden');
 
@@ -1357,11 +1475,18 @@
         }
 
         function resetEditor() {
+            if (activeCountdownInterval) clearInterval(activeCountdownInterval);
             strokeHistory = [];
             originalImage = null;
             imageBase64 = null;
             finalResultBase64 = null;
-            document.getElementById('promptInput').value = "";
+            
+            // Safe check before modifying promptInput value
+            const promptInputEl = document.getElementById('promptInput');
+            if (promptInputEl) {
+                promptInputEl.value = "";
+            }
+            
             fileInput.value = "";
             
             resultView.classList.add('hidden');
