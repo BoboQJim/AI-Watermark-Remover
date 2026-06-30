@@ -1071,22 +1071,27 @@
         }
 
         // Helper fetch handler ensuring exponential backoff logic is applied flawlessly
-        async function fetchWithRetry(url, options, maxRetries = 5) {
-            let delay = 1000;
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    if (response.ok) return response;
-                } catch (e) {
-                    // Retrying silently
-                }
-                if (i < maxRetries - 1) {
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    delay *= 2; 
-                }
-            }
-            throw new Error("API Connection timeout after max retries.");
-        }
+	async function processWithAI(imageBase64, prompt) {
+		const workerUrl = 'https://lingering-tooth-5a40.jiboqing217.workers.dev/'; // 填入你的Worker地址
+
+		const payload = {
+			contents: [{
+				parts: [
+					{ text: prompt },
+					{ inlineData: { mimeType: "image/png", data: imageBase64 } }
+				]
+			}],
+			generationConfig: { responseModalities: ['TEXT', 'IMAGE'] }
+		};
+
+		const response = await fetch(workerUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(payload)
+		});
+
+		return await response.json();
+	}
 
         // Display results to the user
         function showResults() {
